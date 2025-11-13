@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet" />
+<title>Sharpshooter — Professional Skills</title>
+<style>
+body {
+  background: linear-gradient(135deg, #0b0c10, #0f1a33, #111f4d);
+  background-size: 400% 400%;
+  animation: gradientBG 25s ease infinite;
+  font-family: 'Inter', sans-serif; /* moderní font */
+  color: #e4e7ff;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+h2 { color: #9bb0ff; text-align: center; margin-bottom: 20px; }
+
+
+
+.build-box {
+  background: linear-gradient(135deg, #0a0f25, #101a40);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Horní řádek tři sekce vedle sebe */
+.build-container-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Každá sekce uvnitř */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.grid { display: grid; gap: 10px; justify-content: center; }
+.evolution-grid { grid-template-columns: repeat(6, 60px); }
+.enlightenment-grid { display: flex; flex-direction: column; gap: 10px; }
+.enlightenment-pyramid-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.engraving-grid { display: flex; gap: 15px; justify-content: center; }
+
+.icon-container { display: flex; flex-direction: column; align-items: center; cursor: default; }
+.icon { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 4px; background: #1e2030; transition: transform 0.2s, box-shadow 0.2s; }
+.icon:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(80,120,255,0.6); }
+.level { font-size: 13px; color: #ebebeb; text-align: center; }
+.grayscale { filter: grayscale(100%); opacity: 0.5; }
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 16px;
+    justify-content: center;
+}
+
+/* === SKILL CARD === */
+.skill-card {
+    background: linear-gradient(160deg, #0d111b 0%, #1a2340 60%, #0d111b 100%);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 4px 15px rgba(0, 15, 45, 0.7), inset 0 0 12px rgba(80,120,255,0.08);
+    width: 300px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(60,120,255,0.4), inset 0 0 14px rgba(100,140,255,0.12);
+}
+
+/* === ICON === */
+.skill-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.skill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* === LEVEL === */
+.skill-level {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(circle, #5b73ff 0%, #2b3ed6 100%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* === INFO === */
+.skill-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #dce3ff;
+}
+
+.skill-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* === TRIPODS === */
+.skill-stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tripod {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e9f0ff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.6);
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.tripod:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 10px rgba(120,160,255,0.7);
+}
+
+/* --- TRIPOD COLORS --- */
+.tripod.blue {
+    background: linear-gradient(145deg, #4da0ff, #1c57d6);
+}
+
+.tripod.green {
+    background: linear-gradient(145deg, #4ef3b4, #1ea86b);
+}
+
+.tripod.orange {
+    background: linear-gradient(145deg, #ffb347, #ff7e00);
+}
+
+/* === GEM === */
+.gem {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* === RUNE === */
+.rune {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.rune img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+.legendary-bg { background-image: linear-gradient(135deg,#362003,#9e5f04); }
+.epic-bg { background-image: linear-gradient(135deg,#261331,#480d5d); }
+.rare-bg { background-image: linear-gradient(135deg,#111f2c,#113d5d); }
+
+/* Enlightenment Pyramid Hover */
+.enlightenment-pyramid-row .icon-container .icon {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.enlightenment-pyramid-row .icon-container:hover .icon {
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(80,120,255,0.8);
+}
+
+.box-wrapper {
+  position: relative;
+}
+
+.top-right-icons {
+  position: absolute;
+  top: -25px;
+  right: -20px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Společný styl */
+.top-right-icons a img {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+/* Různé velikosti */
+.Kakul {
+  width: 48px;
+  height: 48px;
+}
+
+.Brelshaza {
+  width: 48px;
+  height: 35px;
+  padding-top: 7px;
+}
+
+/* Hover efekt */
+.top-right-icons a img:hover {
+  transform: scale(1.1);
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="box-wrapper">
+ <div class="top-right-icons">
+  <a href="https://www.youtube.com/watch?v=2nC4j69yoX8" target="_blank" class="Kakul">
+    <img src="icons/MayhemShadow.png" alt="YouTube" />
+  </a>
+  <a href="" target="_blank" class="Brelshaza">
+    <img src="icons/PhantomMonarch.png" alt="YouTube" />
+  </a>
+</div>
+
+<div class="build-box">
+  <div class="build-container-top">
+    <div class="section">
+      <h2>Evolution</h2>
+      <div class="grid evolution-grid" id="evolution"></div>
+    </div>
+
+    <div class="section">
+      <h2>Enlightenment</h2>
+      <div class="grid enlightenment-grid" id="enlightenment"></div>
+    </div>
+
+    <div class="section">
+      <h2>Engravings</h2>
+      <div class="engraving-grid" id="engravings"></div>
+    </div>
+  </div>
+
+
+      <h2>Skills</h2>
+  <div class="skills-container" id="skills"></div>
+
+<h2>Information</h2>
+
+</div>
+
+
+
+<script>
+// --- Data ---
+const evolutionData = [30,0,0,10,0,0,0,0,0,3,0,0,0,1,0,1,0,0];
+const enlightenmentData = [3,0,3,0,0,3,0,0]; // dummy levels
+const engravingsData = [
+  {name:"Grudge"},
+  {name:"PreciseDagger"},
+  {name:"Adrenaline",level:3},
+  {name:"CursedDoll",level:3},
+  {name:"HitMaster"},
+  {name:"StabilizedStatus", level:"Can take if you have exp + Paladin or Artist"}
+];
+
+// --- Render Functions ---
+function renderIcons(containerId, data, prefix) {
+  const container = document.getElementById(containerId);
+  data.forEach((lvl,i) => {
+    const div = document.createElement("div");
+    div.classList.add("icon-container");
+
+    const img = document.createElement("img");
+    img.src = `icons/${prefix}${i+1}.png`;
+    img.classList.add("icon");
+    if(lvl === 0) img.classList.add("grayscale");
+    img.title = lvl>0 ? `Level ${lvl}` : "Neaktivní";
+
+    const level = document.createElement("div");
+    level.classList.add("level");
+    if(lvl>0) level.textContent = lvl;
+
+    div.appendChild(img);
+    div.appendChild(level);
+    container.appendChild(div);
+  });
+}
+
+function renderEnlightenmentPyramid(data) {
+  const container = document.getElementById("enlightenment");
+  const pyramidRows = [
+    data.slice(0,2), // top row 2
+    data.slice(2,4), // middle row 2
+    data.slice(4,8)  // bottom row 4
+  ];
+
+  let globalIndex = 0; // nový index přes všechny řádky
+
+  pyramidRows.forEach((rowData,rowIndex) => {
+    const row = document.createElement("div");
+    row.classList.add("enlightenment-pyramid-row");
+    rowData.forEach((lvl,i) => {
+      const div = document.createElement("div");
+      div.classList.add("icon-container");
+
+      const img = document.createElement("img");
+      img.src = `icons/ark_passive_he_${globalIndex+1}.png`; // globální index
+      img.classList.add("icon");
+      if(lvl === 0) img.classList.add("grayscale");
+      img.title = lvl>0 ? `Level ${lvl}` : "Neaktivní";
+
+      const level = document.createElement("div");
+      level.classList.add("level");
+      if(lvl>0) level.textContent = lvl;
+
+      div.appendChild(img);
+      div.appendChild(level);
+      row.appendChild(div);
+
+      globalIndex++; // posun indexu
+    });
+    container.appendChild(row);
+  });
+}
+
+
+function renderEngravings() {
+  const container = document.getElementById("engravings");
+  engravingsData.forEach(e => {
+    const div = document.createElement("div");
+    div.classList.add("icon-container");
+
+    const img = document.createElement("img");
+    img.src = `icons/${e.name}.webp`;
+    img.classList.add("icon");
+    img.title = `${e.name} (Level ${e.level})`;
+
+    const level = document.createElement("div");
+    level.classList.add("level");
+    level.textContent = e.level;
+
+    div.appendChild(img);
+    div.appendChild(level);
+    container.appendChild(div);
+  });
+}
+
+// --- Skills ---
+const skillsData = [
+  { name: "Snipe", level: 12, tripods: [{ value: 1, color: "blue" },{ value: 3, color: "green" },{ value: 1, color: "orange" }], gem: ["cd8","dmg8"], rune: { name: "Galewind", rarity: 1 }, icon: "icons/Snipe.webp" },
+  { name: "Sharpshooter", level: 12, tripods: [{ value: 3, color: "blue" },{ value: 3, color: "green" },{ value: 1, color: "orange" }], gem: ["cd8","dmg8"], rune: { name: "QR", rarity: 1 }, icon: "icons/Sharpshooter.webp" },
+  { name: "Moving_Slash", level: 7, tripods: [{ value: 1, color: "blue" },{ value: 2, color: "green" }], gem: [], rune: { name: "Wealth", rarity: 2 }, icon: "icons/Moving_Slash.webp" },
+  { name: "Charged_Shot", level: 12, tripods: [{ value: 3, color: "blue" },{ value: 1, color: "green" },{ value: 1, color: "orange" }], gem: ["cd8","dmg8"], rune: { name: "Focus", rarity: 1 }, icon: "icons/Charged_Shot.webp" },
+  { name: "Hawk_Shot", level: 12, tripods: [{ value: 2, color: "blue" },{ value: 1, color: "green" },{ value: 1, color: "orange" }], gem: ["cd8","dmg8"], rune: { name: "Wealth", rarity: 1 }, icon: "icons/Hawk_Shot.webp" },
+  { name: "Atomic_Arrow", level: 4, tripods: [{ value: 3, color: "blue" }], gem: [], rune: { name: "Bleed", rarity: 1 }, icon: "icons/Atomic_Arrow.webp" },
+  { name: "Deadly_Slash", level: 10, tripods: [{ value: 2, color: "blue" },{ value: 3, color: "green" },{ value: 1, color: "orange" }], gem: [], rune: { name: "Wealth", rarity: 2 }, icon: "icons/Deadly_Slash.webp" },
+  { name: "Blade_Storm", level: 12, tripods: [{ value: 3, color: "blue" },{ value: 3, color: "green" },{ value: 1, color: "orange" }], gem: ["cd8","dmg8"], rune: { name: "Wealth", rarity: 3 }, icon: "icons/Blade_Storm.webp" },
+  { name: "Last_Rush", level: 0, tripods: [], gem: ["dmg8"], rune: {}, icon: "icons/Last_Rush.webp" },
+  { name: "Golden_Eye", level: 0, tripods: [], gem: [], rune: {}, icon: "icons/Golden_Eye.webp" }
+];
+
+function renderSkills() {
+  const container = document.getElementById("skills");
+  container.style.display = "grid";
+  container.style.gridTemplateColumns = "repeat(4, auto)";
+  container.style.justifyContent = "center";
+  container.style.gap = "16px";
+
+  skillsData.forEach((skill, index) => {
+    const card = document.createElement("div");
+    card.classList.add("skill-card");
+
+    // --- Icon + Level ---
+    const iconDiv = document.createElement("div");
+    iconDiv.classList.add("skill-icon");
+    const img = document.createElement("img");
+    img.src = skill.icon;
+    img.alt = skill.name.replaceAll("_"," ");
+    iconDiv.appendChild(img);
+
+    if(skill.level > 0){
+      const levelDiv = document.createElement("div");
+      levelDiv.classList.add("skill-level");
+      levelDiv.textContent = skill.level;
+      iconDiv.appendChild(levelDiv);
+    }
+
+    // --- Info ---
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("skill-info");
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("skill-title");
+    titleDiv.textContent = skill.name.replaceAll("_"," ");
+    infoDiv.appendChild(titleDiv);
+
+    const statsDiv = document.createElement("div");
+    statsDiv.classList.add("skill-stats");
+
+    skill.tripods.forEach(t => {
+      const td = document.createElement("div");
+      td.classList.add("tripod", t.color);
+      td.textContent = t.value;
+      td.title = `Tripod Level ${t.value}`;
+      statsDiv.appendChild(td);
+    });
+
+    skill.gem.forEach(g => {
+      const gDiv = document.createElement("div");
+      gDiv.classList.add("gem","legendary-bg");
+      const gImg = document.createElement("img");
+      gImg.src = `icons/${g}.webp`;
+      gImg.alt = g;
+      gImg.title = g;
+      gDiv.appendChild(gImg);
+      statsDiv.appendChild(gDiv);
+    });
+
+    if(skill.rune && skill.rune.name && skill.rune.rarity) {
+      const runeDiv = document.createElement("div");
+      runeDiv.classList.add("rune");
+      runeDiv.style.backgroundImage =
+        skill.rune.rarity===1 ? "linear-gradient(135deg,#362003,#9e5f04)" :
+        skill.rune.rarity===2 ? "linear-gradient(135deg,#261331,#480d5d)" :
+        "linear-gradient(135deg,#111f2c,#113d5d)";
+      const runeImg = document.createElement("img");
+      runeImg.src = `icons/${skill.rune.name}_${skill.rune.rarity}.webp`;
+      runeImg.alt = skill.rune.name;
+      runeImg.title = `${skill.rune.name} (Rarity ${skill.rune.rarity})`;
+      runeDiv.appendChild(runeImg);
+      statsDiv.appendChild(runeDiv);
+    }
+
+    infoDiv.appendChild(statsDiv);
+    card.appendChild(iconDiv);
+    card.appendChild(infoDiv);
+
+    // --- poslední dva vycentrovat ---
+    if(index >= skillsData.length - 2){
+      card.style.gridColumn = index === skillsData.length - 2 ? "2 / span 1" : "3 / span 1";
+    }
+
+    container.appendChild(card);
+  });
+}
+
+// --- Render All ---
+renderIcons("evolution", evolutionData, "ark_passive_evolution_");
+renderEnlightenmentPyramid(enlightenmentData);
+renderEngravings();
+renderSkills();
+</script>
+
+
+
+</body>
+</html>
